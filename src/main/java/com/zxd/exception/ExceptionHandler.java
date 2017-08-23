@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 public class ExceptionHandler implements HandlerExceptionResolver {
+	
+	//文件2
 
 	//private static Logger logger = LoggerFactory.getLogger(ExceptionHandler.class);
 	private static final Gson gson = new Gson();
