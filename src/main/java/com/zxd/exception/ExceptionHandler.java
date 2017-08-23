@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 
 public class ExceptionHandler implements HandlerExceptionResolver {
 	
-	//文件2
+	//文件2 再来一个测试
 
 	//private static Logger logger = LoggerFactory.getLogger(ExceptionHandler.class);
 	private static final Gson gson = new Gson();
