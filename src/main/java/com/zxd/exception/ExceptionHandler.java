@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 
 public class ExceptionHandler implements HandlerExceptionResolver {
 	
-	//文件2 再来一个测试 再来 很好 很好 现在使用的是git 方式上传
+	//文件2 再来一个测试 再来 很好 很好 现在使用的是git 方式上传 666
 
 	//private static Logger logger = LoggerFactory.getLogger(ExceptionHandler.class);
 	private static final Gson gson = new Gson();
