@@ -25,7 +25,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	//private static Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 	private static Gson gson = new Gson();
 
-
 	/*
 	 * html页面 静态资源 接口 已登录 通过 通过 通过 未登录 重定向index 通过 799
 	 */
