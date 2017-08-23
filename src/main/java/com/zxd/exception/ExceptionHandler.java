@@ -1,6 +1,11 @@
 package com.zxd.exception;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +13,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.zxd.utils.JsonHelper;
 
 public class ExceptionHandler implements HandlerExceptionResolver {
 	
@@ -18,6 +24,37 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
+		String callback = request.getParameter("callback");
+		String front = null;
+		
+		ex.printStackTrace();
+		response.setContentType("application/json; charset=UTF-8");
+		response.setCharacterEncoding("utf-8");
+
+		try {
+			PrintWriter out = response.getWriter();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("code", 99);
+			map.put("msg", "工程师正在修复问题！");
+
+			String output = gson.toJson(map);
+			if(front != null) {
+				response.setContentType("text/html; charset=UTF-8");
+				output = front + "(" + output + ");</script>";
+			}else{
+				if (callback != null)
+					output = callback + "(" + output + ")";
+			}
+
+			out.println(JsonHelper.encode(output));
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+		
 /*		String callback = request.getParameter("callback");
 		String front = null;
 		if(request.getRequestURL().toString().contains("upload.do")){
@@ -166,6 +203,6 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}*/
-			return null;
+			//return null;
 	}
 }

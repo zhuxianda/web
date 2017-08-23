@@ -1,4 +1,4 @@
 #java
-.class
+*.class
 target/
-classes/
+classes

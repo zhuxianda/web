@@ -35,7 +35,7 @@ public class PingController {
     }
     
     @RequestMapping(value = "testMysql.do")
-    public ResponseEntity<String> getMysql(String callback){
+    public ResponseEntity<String> getMysql(String callback) throws Exception{
         return jsonpEntity(databaseService.getTodoList(), callback);
     }
 }

@@ -27,8 +27,9 @@ public class DatabaseService {
 	@Autowired
 	private RedisDao redisDao;
 	
-	public List<Map<String, Object>> getTodoList() {
-		return mysqlDao.getTodoLists();
+	public List<Map<String, Object>> getTodoList() throws Exception {
+		throw new Exception("出价不能为空");
+		//return mysqlDao.getTodoLists();
 	}
 	
 	public String getRedis() {
