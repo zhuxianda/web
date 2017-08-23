@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static com.zxd.utils.JsonHelper.jsonpEntity;;
 
 /**
- * Created by liyuanzhe on 17-3-2.
+ * Created by zhuxianda 2017.8.23
  */
 @Controller
 public class PingController {
