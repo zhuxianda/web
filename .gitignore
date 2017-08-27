@@ -1,5 +1,5 @@
 #java
 *.class
-target
+target/*
 classes
 .idea
