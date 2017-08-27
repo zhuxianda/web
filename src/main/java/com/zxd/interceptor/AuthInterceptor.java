@@ -45,6 +45,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			response.setHeader("Pragma", "Pragma");
 			response.setHeader("Cache-Control", "max-age=36000");
 		}
+		
+        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Methods","*");
+        response.setHeader("Access-Control-Max-Age","100");
+        response.setHeader("Access-Control-Allow-Headers", "Authentication");
+        response.setHeader("Access-Control-Allow-Credentials","false");
+        
 
 		// if (url.equals("http://e.4399.cn:8112/"))
 		// url += "ads/index.html";

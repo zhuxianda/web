@@ -12,26 +12,126 @@
 </div>
 
 <script type="text/babel">
-    class Welcome extends React.Component {
+
+    class TodoInput extends React.Component {
 
         constructor(props) {
             super(props);
-            this.state = {value:''};
+            this.state = {text: ''};
 
+        }
+
+        handleClick() {
+            const onAdd = this.props.onAdd;
+            onAdd && onAdd(this.state.text);
+        }
+
+        handleChange(v) {
+            this.setState({text:v});
         }
 
         render() {
-            return <h1>Hello {this.props.name}</h1>
+            return (
+                    <div className="new-todo">
+                        <input value={this.state.text} onChange={e => this.handleChange(e.target.value)} type='input'/>
+                        <button onClick={() => this.handleClick()}>添加</button>
+                    </div>
+            )
         }
     }
-
     class App extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {todos: [], show: 'all'};
+
+        }
+
+        sendToService(state) {
+            fetch('http://127.0.0.1:8089/saveToList.do?'+'queryBody='+JSON.stringify(state)).then(response => response.json())
+                .then(json => {
+                    console.log(json);
+                });
+        }
+
+        handleAdd(text) {
+            //console.log(text);
+            this.setState(preState => {
+                let state = ({
+                    todos:[...preState.todos,{
+                        id:Date.now(),
+                        text:text,
+                        done:false
+                    }]
+                });
+
+                this.sendToService(state);//为什么要使用this 呢？
+
+                return state;
+
+            })
+
+            //let fetchResponse;
+
+            //fetch('http://127.0.0.1:8089/testMysql.do').then(r => r.json()).then(r => {fetchResponse = r;console.log(fetchResponse);return ''; });
+            //fetch('http://127.0.0.1:8089/testMysql.do').then(r => r.json()).then(r => console.log(r));
+
+            //console.log('111',fetchResponse);
+
+//            const req = {
+//                name: 'Wing',
+//                age: 32,
+//                skills: ['HTML', 'CSS', 'JavaScript']
+//            };
+
+
+
+        }
+
+
+
+
+
+
         render() {
-            return (<div>
-                <Welcome name="zhuxianda"/>
-            </div>)
+
+            let {todos, show} = this.state;
+
+            todos = todos.filter(t => show === 'all' || !t.done);
+
+
+            return (
+                    <div className="todoapp">
+                        <h1>Todos</h1>
+                        <TodoInput onAdd={(text) => this.handleAdd(text)} />
+                        <div className="main">
+                            <ul>
+                                {todos.map(todo => {
+                                    let cssName = 'todo-text ' + (todo.done?'done':'');
+                                    return(
+                                            <li key={todo.id}>
+                                                <input type="checkbox" checked={todo.done}
+                                                       onClick={() => this.handleToggle(todo.id)}
+                                                />
+                                                <span className={`${cssName}`}>{todo.text}</span>
+                                            </li>
+                                    )
+                                })
+
+                                }
+                            </ul>
+                        </div>
+                        <div className="status">
+                            <span className="todo-count">{todos.length}</span>
+                            <button onClick={e => this.setState({show:'active'})}>Active</button>
+                            <button onClick={e => this.setState({show:'all'})}>All</button>
+
+                        </div>
+                    </div>
+            )
         }
     }
+
 
     ReactDOM.render(
             <App/>, document.getElementById('root')

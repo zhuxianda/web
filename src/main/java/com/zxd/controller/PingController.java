@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zxd.dao.MysqlDao;
+import com.zxd.model.QueryData;
 import com.zxd.service.DatabaseService;
+import com.alibaba.fastjson.JSON;
 
 import static com.zxd.utils.JsonHelper.jsonpEntity;;
 
@@ -37,5 +40,18 @@ public class PingController {
     @RequestMapping(value = "testMysql.do")
     public ResponseEntity<String> getMysql(String callback) throws Exception{
         return jsonpEntity(databaseService.getTodoList(), callback);
+    }
+    
+    
+    @RequestMapping(value = "saveToList.do")
+    public ResponseEntity<String> saveToList(String queryBody) throws Exception{
+    	
+    	System.out.println(queryBody);
+    	
+    	QueryData query = JSON.parseObject(queryBody, QueryData.class);
+    	
+    	System.out.println(query);
+    	
+        return jsonpEntity(databaseService.getTodoList(), null);
     }
 }

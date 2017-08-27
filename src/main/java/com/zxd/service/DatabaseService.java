@@ -28,23 +28,22 @@ public class DatabaseService {
 	private RedisDao redisDao;
 	
 	public List<Map<String, Object>> getTodoList() throws Exception {
-		throw new Exception("出价不能为空");
-		//return mysqlDao.getTodoLists();
+		//throw new Exception("出价不能为空");
+		return mysqlDao.getTodoLists();
 	}
 	
 	public String getRedis() {
 		return redisDao.get("hi");
 	}
 	
+	public List<Map<String, Object>> addTodoList() {
+		//throw new Exception("出价不能为空");
+		return mysqlDao.getTodoLists();
+	}
 	
 	public static void main(String[] args) throws ParseException, InterruptedException {
 		// ApplicationContext ac = new
 		// ClassPathXmlApplicationContext("spring/adgame_planquery.xml");
 	}
 
-	/*
-	 * public List<String> getSearchUid(Map<String, Map<String, Object>>
-	 * account2map) { List<String> res = new ArrayList<String>(); for (String
-	 * key : account2map.keySet()) { res.add(key); } return res; }
-	 */
 }

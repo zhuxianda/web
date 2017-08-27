@@ -8,3 +8,16 @@ CREATE TABLE `web`.`todolist` (
 ALTER TABLE `web`.`todolist` 
 CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
 
+
+ALTER TABLE `todolist` CHANGE `info` `info` VARCHAR( 45 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
+
+
+ALTER TABLE `todolist` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+
+
+ALTER TABLE `web` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+
+
+insert into todolist (info,state) value("第一条测试",0);
+
+	
