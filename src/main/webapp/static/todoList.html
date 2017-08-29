@@ -6,6 +6,7 @@
     <script src="https://unpkg.com/react@latest/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="./js/webApi.js"></script>
 </head>
 <body>
 <div id="root">
@@ -41,17 +42,54 @@
     }
     class App extends React.Component {
 
+
+        start() {
+            let oldState = this.state;
+
+            this.handle = setInterval(() => {
+                if(oldState !== this.state) {
+                    webApi.sendToService(this.state).then(r => console.log("同步成功"));
+                    oldState = this.state ;
+                }
+
+            },1000);
+        }
+
         constructor(props) {
             super(props);
             this.state = {todos: [], show: 'all'};
-
+            this.start();
         }
 
-        sendToService(state) {
-            fetch('http://127.0.0.1:8089/saveToList.do?'+'queryBody='+JSON.stringify(state)).then(response => response.json())
-                .then(json => {
-                    console.log(json);
-                });
+//        sendToService(state) {
+//            fetch('http://127.0.0.1:8089/saveToList.do?'+'queryBody='+JSON.stringify(state)).then(response => response.json())
+//                .then(json => {
+//                    console.log(json);
+//                });
+//        }
+
+
+        //const a = self.setInterval(() => console.log("aa"),1000);
+
+//        handleLogin() {
+//            login().then(() => {
+//                return this.getTodos()
+//            }).then(todos => {
+//                this.setState();
+//                this.startSync();
+//            });
+//        }
+//
+//        handleLogout() {
+//            this.stopSync();
+//        }
+//
+        stopSync() {
+            clearInterval(this.handle);
+        }
+
+        reStartSync() {
+            this.start();
         }
 
         handleAdd(text) {
@@ -65,7 +103,9 @@
                     }]
                 });
 
-                this.sendToService(state);//为什么要使用this 呢？
+                let stateUpdate ;
+                //this.sendToService(state);//为什么要使用this 呢？
+                //webApi.sendToService(state).then(r => stateUpdate = r);
 
                 return state;
 
@@ -85,11 +125,10 @@
 //            };
 
 
-
         }
 
 
-
+       // const a = self.setInterval(() => console.log("aa"),1000);
 
 
 
@@ -113,7 +152,7 @@
                                                 <input type="checkbox" checked={todo.done}
                                                        onClick={() => this.handleToggle(todo.id)}
                                                 />
-                                                <span className={`${cssName}`}>{todo.text}</span>
+                                                <span className={cssName}>{todo.text}</span>
                                             </li>
                                     )
                                 })
@@ -125,6 +164,10 @@
                             <span className="todo-count">{todos.length}</span>
                             <button onClick={e => this.setState({show:'active'})}>Active</button>
                             <button onClick={e => this.setState({show:'all'})}>All</button>
+
+                            <button onClick={() => this.stopSync()}>停止同步</button>
+
+                            <button onClick={() => this.reStartSync()}>启动同步</button>
 
                         </div>
                     </div>

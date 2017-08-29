@@ -52,6 +52,6 @@ public class PingController {
     	
     	System.out.println(query);
     	
-        return jsonpEntity(databaseService.getTodoList(), null);
+        return jsonpEntity(query, null);
     }
 }
