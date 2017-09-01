@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <!--<script src="./js/find.js"></script>-->
+    </head>
+    <script type="text/babel">
+        const directory = {
+            name: 'A',
+            children: [
+                {type: 'file', name: 'B'},
+                {type:' directory', name: 'C', children: [
+                    {type: 'file', name: 'K'},
+                    {type:' directory', name: 'M', children: []},
+                ]},
+                {type: 'file', name: 'D'},
+                {type:' directory', name: 'E', children: []},
+            ],
+            type: 'directory'
+        };
+
+
+        function find(directory,tab) {
+
+            console.log(tab,"File:"+directory.name+":",directory.name)
+
+            directory.children && directory.children.forEach((el) => find(el,tab+"->"));
+        }
+
+
+        find(directory,"");
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
+
+<!--
+htmlfor(let index in directory.children) {
+//console.log(children[index])
+find(directory.children[index],tab+"->")
+}-->

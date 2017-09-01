@@ -14,19 +14,6 @@ const directory = {
 };
 
 
-const a = {
-    find(fileURL) {
-
-        for()
 
 
-        if(fileURL.isFile()) {
-            console.log("tab"+文件名)
-        }else {
-            console.log("tab"+文件夹)
-            find(文件夹地址);
-        }
 
-    }
-
-}
