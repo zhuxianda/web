@@ -17,26 +17,20 @@
         //console.log('--------',array.length);
         if(array.length === 0) {
             return [];
-        } else if(array.length === 1) {
-            console.log(array);
-            return array
-        } /*else if(array.length === 2 ) {
-            if(array[0] > array[1]) {
-                return [...array[1],...array[2]];
-            } else {
-                return array;
-            }
-        } */else {
+        } else {
             const [one,..._xs] = array;
-            let small = [];
-            let big = [];
-            _xs.forEach((el) => {
-                if(one > el) {
-                    small.push(el);
-                } else {
-                    big.push(el);
-                }
-            })
+
+            let small = _xs.filter((el) => one > el);
+            let big = _xs.filter((el)  => el >= one);
+//            let small = [];
+//            let big = [];
+//            _xs.forEach((el) => {
+//                if(one > el) {
+//                    small.push(el);
+//                } else {
+//                    big.push(el);
+//                }
+//            })
             //console.log('-',small,'+',big);
             return [...sort(small),one,...sort(big)];
         }

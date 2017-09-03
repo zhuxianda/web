@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="https://unpkg.com/react@latest/dist/react.js"></script>-->
+    <!--<script src="http</script>s://unpkg.com/react-dom@latest/dist/react-dom.js">-->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!--<script src="./js/find.js"></script>-->
+</head>
+<script type="text/babel">
+
+    const array = [];
+
+    /**
+     *
+     * @param xs 零钱
+     * @param num 总金额
+     * @returns [] or null
+     */
+    function f (xs,num) {
+
+        if(num < 0 )
+            return null;
+
+        if(num === 0)
+            return [];
+
+        if(xs.length === 0)
+            return null;
+
+        const [x,..._xs] = xs;
+
+        if(num -x < 0 )
+            return null;
+
+        //保留x
+        
+        let a = null;
+        let sub_solution = f(xs,num-x);
+        if(sub_solution != null) {
+            a = [x,...sub_solution];
+        }
+
+        //不要x
+        let b = f(_xs,num);
+
+//        if(b===null) {
+//            console.log(_xs,"-",num-x);
+//            console.log(xs,"-",num-x);
+//        }
+
+        if(a != null && b != null) {
+            return a.length < b.length ? a : b;
+        }
+
+
+        return a===null ? b : a;
+
+
+    }
+
+    console.log(f([1,4],17));
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

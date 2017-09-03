@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!--<script src="./js/find.js"></script>-->
+</head>
+<script type="text/babel">
+
+    const array = [1,5,1,8,3,2,99,1,23,3,2,1,9];
+
+    //const array = [1,5,6];
+
+    function insert(array) {
+        //console.log('--------',array.length);
+        if(array.length === 0) {
+            return [];
+        } else {
+            let [x,..._xs] =  array;
+            return insertSort(x,insert(_xs));
+
+        }
+
+    }
+
+    function insertSort(x,ys) {
+
+        if(ys.length===0) {
+            return [x];
+        }
+
+        let [y,..._ys] =  ys;
+        if(y > x ) {
+            return [x,...ys];
+        } else {
+            return [y,...insertSort(x,_ys)];
+        }
+    }
+
+
+    console.log(insert(array));
+    //let a = [...[0],1,...[1]];
+    //console.log(a);
+</script>
+</head>
+<body>
+
+</body>
+</html>

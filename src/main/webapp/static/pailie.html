@@ -9,36 +9,19 @@
     <!--<script src="./js/find.js"></script>-->
 </head>
 <script type="text/babel">
-    const array = [1,5,1,8,3,2,99,1,23,3,2,1,9];
+    const array = [1,3,5];
 
     //const array = [1,5,6];
 
-    function sort(array) {
+    function pailie(array) {
         //console.log('--------',array.length);
         if(array.length === 0) {
             return [];
-        } else if(array.length === 1) {
-            console.log(array);
-            return array
-        } /*else if(array.length === 2 ) {
-            if(array[0] > array[1]) {
-                return [...array[1],...array[2]];
-            } else {
-                return array;
-            }
-        } */else {
+        } else {
             const [one,..._xs] = array;
-            let small = [];
-            let big = [];
-            _xs.forEach((el) => {
-                if(one > el) {
-                    small.push(el);
-                } else {
-                    big.push(el);
-                }
-            })
+
             //console.log('-',small,'+',big);
-            return [...sort(small),one,...sort(big)];
+            return insert(one,pailie(_xs));
         }
 
         //f(n) f(n-1)
@@ -47,6 +30,10 @@
         //console.log(tab,"File:"+directory.name+":",directory.name)
 
         //directory.children && directory.children.forEach((el) => find(el,tab+"->"));
+    }
+
+    function  insert(one ,_ys) {
+
     }
 
 

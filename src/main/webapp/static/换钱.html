@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="https://unpkg.com/react@latest/dist/react.js"></script>-->
+    <!--<script src="http</script>s://unpkg.com/react-dom@latest/dist/react-dom.js">-->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!--<script src="./js/find.js"></script>-->
+</head>
+<script type="text/babel">
+
+    const array = [];
+
+    function f (num) {
+
+        if ( num < 0) {
+            return null;
+        } else if(num === 0) {
+            return [];
+        } else if(num > 0) {
+            //return array.push(2);
+
+//            return 1 + Math.min(f(num - 5),
+//                f(num - 3),
+//                f(num - 1)
+//            );
+
+             let a = f(num -5);
+
+             let c = f(num -1);
+
+
+             if(a != null && c != null) {
+                 return a.length < c.length ? a.concat(5):c.concat(1);
+             }
+
+             return a === null ? c.concat(1) : a.concat(5);
+
+
+        }
+
+    }
+
+    console.log(f(7));
+
+
+
+
+
+
+
+
+//    function min(...args) {
+//        let minLen = 9999999;
+//        for(let i = 0; i < args.length; ++i) {
+//            if (args[i].length < minLen)
+//        }
+//    }
+//
+//    function k(a,b,c) {
+//        if(a <= b && a <= c) {
+//            array.push(5);
+//            return a;
+//        } else if(b <= a &&  b <= c) {
+//            array.push(3);
+//            return b;
+//        } else if(c <= a && c <= b) {
+//            array.push(1);
+//            return c;
+//        }
+//
+//    }
+
+    //console.log('go');f(7)
+    //f(7);
+    //console.log(array);
+
+    //console.log(insert(array));
+    //let a = [...[0],1,...[1]];
+    //console.log(a);
+
+
+
+    function chage(lingqian, zong_e) {
+
+
+    }
+</script>
+</head>
+<body>
+
+</body>
+</html>

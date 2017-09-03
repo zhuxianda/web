@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="https://unpkg.com/react@latest/dist/react.js"></script>-->
+    <!--<script src="http</script>s://unpkg.com/react-dom@latest/dist/react-dom.js">-->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!--<script src="./js/find.js"></script>-->
+</head>
+<script type="text/babel">
+
+    const array = [1,5,1,8,3,2,99,1,23,3,2,1,9];
+
+    function beibao (num,array) {
+
+        if ( num <= 0) {
+            return array;
+        } else if((num-1) === 0) {
+            return array.push(1);
+        } else if((num-2) === 0) {
+            return array.push(2);
+        } else if((num-3) === 0) {
+            return array.push(3);
+        }
+
+        if ((num - 3) > 0) {
+            return [...beibao(num - 1),...beibao(num - 2),...beibao(num - 3)];
+        } else if ((num - 2) > 0) {
+            return [...beibao(num - 1), 1,'|',...beibao(num - 2), 2,'|'];
+        } else if ((num - 1) > 0) {
+            return [...beibao(num - 1), 1];
+        }
+
+
+
+
+    }
+
+    //console.log('go');
+    console.log(beibao(10));
+
+    //console.log(insert(array));
+    //let a = [...[0],1,...[1]];
+    //console.log(a);
+</script>
+</head>
+<body>
+
+</body>
+</html>
