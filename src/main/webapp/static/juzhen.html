@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+<!--        <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>-->
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <!--<script src="./js/find.js"></script>-->
+    </head>
+    <script type="text/babel">
+        //定义
+        //设A为m×n阶矩阵（即m行n列），第i 行j 列的元素是a(i,j)，即：A=a(i,j)
+        //定义A的转置为这样一个n×m阶矩阵B，满足B=a(j,i)，即 b (i,j)=a (j,i)（B的第i行第j列元素是A的第j行第i列元素），记A'=B。(有些书记为  ，这里T为A的上标）
+        //直观来看，将A的所有元素绕着一条从第1行第1列元素出发的右下方45度的射线作镜面反转，即得到A的转置。
+        //例： xs = [[1, 2, 3, 4], [5, 6, 7, 8]]
+        //transpose xs = [ [1, 5], [2, 6], [3, 7], [4, 8]]
+
+        //返回结果集 [[]]
+
+        let zip = (el,index,c) => {
+            console.log(el,"-----",index);
+            if(c == null) {
+                console.log(el,"--kkk---",[el,...[]]);
+                return ([el,...[]]);
+            } else {
+                console.log("go--",c);
+                console.log("go--",index);
+                return ([el,...(c[index])]);
+            }
+        }
+
+        let a = (xs) => {
+            const [x,..._xs] = xs;
+
+            if(x == null) {
+                return null;
+            }
+
+            const c = a(_xs);
+
+
+            let res = x.map((el,index) =>{
+//                if(c == null) {
+//                    return ([el,...[]]);
+//                } else {
+//                    return ([el,...(c[index])]);
+//                }
+                zip(el,index,c);
+            })
+
+            //console.log(res);
+            return res;
+        }
+
+        const xs = [[1, 2, 3, 4], [5, 6, 7, 8],[9, 10, 11, 12]];
+
+
+        console.log("go");
+        console.log(a(xs));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
+
+
