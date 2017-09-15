@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script type="text/babel">
+        const f = (m,n) => {
+            if(m == 0  || n == 0) {
+                return null;
+            }
+
+            if(m==1) {
+                return 1;
+            }
+            if(n ==1){
+                return 1;
+            }
+            return f(m-1,n)+f(m,n-1);
+        }
+        console.log(f(5,5));
+
+        const k = (n) => {
+            //console.log(n)
+            if(n < 0 ) {
+                return 0;
+            }
+
+            if(n == 0) {
+                return 1;
+            }
+            if(n > 0 ){
+                return k(n-1)+k(n-2);
+            }
+        }
+        console.log(k(3));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

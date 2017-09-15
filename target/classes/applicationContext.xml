@@ -17,8 +17,8 @@
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations">
 			<list>
-				<value>file:/etc/adgame_local.properties</value>
-				<value>file:/etc/adgame_product.properties</value>
+				<value>classpath:zxd_local.properties</value>
+				<value>file:/etc/zxd_product.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -26,6 +26,7 @@
 	<context:component-scan base-package="com.zxd" />
     
 	<import resource="spring-mvc.xml" />
+	<import resource="databases.xml" /> 
 	<!-- <import resource="classpath:spring/adgame_planquery.xml" /> -->
 	<!-- <import resource="classpath:spring/balance-config.xml" /> -->
 	<!-- <bean class="com.xm4399.adgame.promotion.utils.SpringContextHolder"
