@@ -2,9 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <!--<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>-->
+    <script type="text/javascript">
+        var island = [
+            [1,0,1,0,1],
+            [1,1,0,1,0],
+            [1,1,1,0,1],
+        ];
+
+/*        console.log(island[0]);
+        console.log(island[1]);
+        console.log(island[2]);*/
+
+        var islandExit = false;
+        var w = island[0].length;//4
+        var h = island.length;//3
+        var islandSize = 0;
+
+        //console.log(w,h,"zzz")
+        //console.log(f);
+        function f(island,x,y) {
+            //console.log(11,island[x][y]);
+            if(y==w) {
+                y=0;
+                x=x+1;
+            }
+            if(x==h) {
+                return null;
+
+            }
+
+            if(island[x][y] == 1) {
+                //console.log(x,y,'存在的');
+                island[x][y] = 0;
+                islandExit = true;
+                //右
+                f(island,x,y+1);
+                //下
+                f(island,x+1,y);
+                //islandSize++;
+            }
+            return null;
+
+        }
+        //console.log(island[0][0]);
+        for(var i=0;i<w;i++) {
+            for(var j=0;j<h;j++) {
+                f(island,j,i);
+                //console.log(i,j,islandExit);
+                if(islandExit) {
+                    //console.log(i,j,"zzz");
+                    islandSize++;
+                    islandExit = false;
+                }
+            }
+
+        }
+        console.log(islandSize);
+
+
+    </script>
 </head>
 <body>
-$END$
+
 </body>
 </html>

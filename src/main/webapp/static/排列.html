@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script type="text/babel">
+
+        function pingjie(k,c) {
+            //console.log('----------',k)
+            let res = [] ;
+            k.map((el) => {
+                let size = el.length;
+                for(let i=0;i<size+1;i++) {
+                    res.push(el.slice(0,i).concat(c).concat(el.slice(i,size)).sort());
+                    //console.log('++++++',i,el.slice(0,i).concat(c).concat(el.slice(i,size)));
+                }
+            })
+            return res;
+        }
+
+
+        function f(array) {
+            if(array.length == 0) {
+                return [];
+            }
+            if(array.length == 1) {
+                return [array,[]];
+            }
+            let [c,...b] = array;
+            let k = f(b);
+            //加c
+            let addC = pingjie(k,c);
+            //不加c
+            return [...addC,...k]
+
+        }
+
+        Array.prototype.quc = function () {
+            var res = [];
+            var jso = {};
+            for (var i = 0; i < this.length; i++) {
+                if (!jso[JSON.stringify(this[i])]) {
+                    res.push(this[i]);
+                    jso[JSON.stringify(this[i])] = 1;
+                }
+                ;
+            }
+            return res;
+        }
+
+
+        console.log(f([1,2,2]).quc());
+    </script>
 </head>
 <body>
-$END$
+
 </body>
 </html>
