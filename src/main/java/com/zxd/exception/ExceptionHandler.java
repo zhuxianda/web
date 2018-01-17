@@ -27,32 +27,87 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 		String callback = request.getParameter("callback");
 		String front = null;
 		
-		ex.printStackTrace();
-		response.setContentType("application/json; charset=UTF-8");
-		response.setCharacterEncoding("utf-8");
+		ex.printStackTrace();		
+		
+		if(ex instanceof LoginException){
+			ex.printStackTrace();
+			response.setContentType("application/json; charset=UTF-8");
+			response.setCharacterEncoding("utf-8");
+			try {
+				PrintWriter out = response.getWriter();
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("code", 799);
+				map.put("msg", "请登陆后再进行操作");
 
-		try {
-			PrintWriter out = response.getWriter();
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("code", 99);
-			map.put("msg", "工程师正在修复问题！");
+				String output = gson.toJson(map);
+				if(front != null) {
+					response.setContentType("text/html; charset=UTF-8");
+					output = front + "(" + output + ");</script>";
+				}else{
+					if (callback != null)
+						output = callback + "(" + output + ")";
+				}
 
-			String output = gson.toJson(map);
-			if(front != null) {
-				response.setContentType("text/html; charset=UTF-8");
-				output = front + "(" + output + ");</script>";
-			}else{
-				if (callback != null)
-					output = callback + "(" + output + ")";
+				out.println(JsonHelper.encode(output));
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+			return null;
+		} else if (ex instanceof InvalidDataException) {
+			response.setContentType("application/json; charset=UTF-8");
+			response.setCharacterEncoding("utf-8");
+			try {
+				PrintWriter out = response.getWriter();
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("code", 99);
+				map.put("msg", ex.getMessage());
 
-			out.println(JsonHelper.encode(output));
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+				String output = gson.toJson(map);
+				if(front != null) {
+					response.setContentType("text/html; charset=UTF-8");
+					output = front + "(" + output + ");</script>";
+				}else{
+					if (callback != null)
+						output = callback + "(" + output + ")";
+				}
+
+				out.println(JsonHelper.encode(output));
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		} else {
+			try {
+				PrintWriter out = response.getWriter();
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("code", 99);
+				map.put("msg", "工程师正在修复问题！");
+
+				String output = gson.toJson(map);
+				if(front != null) {
+					response.setContentType("text/html; charset=UTF-8");
+					output = front + "(" + output + ");</script>";
+				}else{
+					if (callback != null)
+						output = callback + "(" + output + ")";
+				}
+
+				out.println(JsonHelper.encode(output));
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
 		}
-		return null;
+		
+		
+		
+
 		
 		
 /*		String callback = request.getParameter("callback");

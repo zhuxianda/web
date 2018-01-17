@@ -1,6 +1,9 @@
 package com.zxd.interceptor;
 
 import com.google.gson.Gson;
+import com.zxd.exception.LoginException;
+import com.zxd.service.PlanQueryCommonMessage;
+import com.zxd.service.WeixinService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +24,9 @@ import java.util.Set;
 
 @Component
 public class AuthInterceptor extends HandlerInterceptorAdapter {
+	
+	@Autowired
+	WeixinService weixinService;
 
 	//private static Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 	private static Gson gson = new Gson();
@@ -52,7 +58,33 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         response.setHeader("Access-Control-Allow-Headers", "Authentication");
         response.setHeader("Access-Control-Allow-Credentials","false");
         
-
+        if (url.endsWith(".html")) {
+        	return true;
+        }
+        //获取info3rd 如果没有 info3rd 拒绝访问 
+        
+        
+		if (url.indexOf("getWeixinUserInfo.do") == -1) {
+			// 获取用户名，未登录提供给判断index的显示方式
+			
+			//WX 测试代码
+			Long uid = -1l;
+			StringBuffer url1 = request.getRequestURL();
+			String info3rd = request.getParameter("info3rd");
+			if(info3rd != null) {
+				uid = this.weixinService.getUidBy3rd(info3rd);
+				if(uid!= -1) {
+					PlanQueryCommonMessage.setUid(uid);
+					System.out.println(url1 + "|" + info3rd);
+				}
+			} 
+			//WX 测试代码	
+			if(uid == -1l) {
+				throw new LoginException("请登录后操作");// 接口拦截
+			}
+		}
+		
+		
 		// if (url.equals("http://e.4399.cn:8112/"))
 		// url += "ads/index.html";
 		//String contextPath = request.getContextPath().replaceAll("/adgame_promotion", "");

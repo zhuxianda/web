@@ -106,4 +106,12 @@ public class RedisDao implements InitializingBean {
     public void setInterest_redisAddr(String interest_redisAddr) {
         this.redisAddr = interest_redisAddr;
     }
+    
+	public ShardedJedisPool getPool() {
+		return pool;
+	}
+
+	public void setPool(ShardedJedisPool pool) {
+		this.pool = pool;
+	}
 }

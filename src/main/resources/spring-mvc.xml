@@ -20,7 +20,7 @@
 	</bean>
 
 	<!-- 定义无需Controller的url<->view直接映射 -->
-	<mvc:view-controller path="/404.html" view-name="error/404" />
+<!-- 	<mvc:view-controller path="/404.html" view-name="error/404" /> -->
 
 	<!-- 统一异常处理 -->
 	<bean id="exceptionHandler" class="com.zxd.exception.ExceptionHandler" />
