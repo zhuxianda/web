@@ -27,7 +27,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	WeixinService weixinService;
-
+	
 	//private static Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 	private static Gson gson = new Gson();
 

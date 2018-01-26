@@ -20,4 +20,13 @@ ALTER TABLE `web` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 
 insert into todolist (info,state) value("第一条测试",0);
 
+return this.promotionJdbcTemplate.queryForObject(sql, new Object[] {gid, uid},Integer.class);
+
 	
+
+
+
+config.setMaxTotal
+
+
+config.setMaxWaitMillis
