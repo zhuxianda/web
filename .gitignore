@@ -3,4 +3,4 @@
 target/*
 classes
 .idea
-/target/
+target
