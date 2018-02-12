@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script type="text/babel">
+
+        Array.prototype.choose = function(n) {
+            const xs = this;
+
+            if (xs.length === 0) {
+                return [];
+            }
+
+            if (n <= 0) {
+                return [];
+            }
+
+            if (n === 1) {
+                return xs.map(x => [x]);
+            }
+
+            const x = xs[0];
+            const _xs = xs.slice(1);
+
+            const r1 = _xs.choose(n-1).map(ys => [x].concat(ys));
+            const r2 = _xs.choose(n);
+
+            return r1.concat(r2);
+        }
+
+        const points = 'ABCDEFGHIJK'.split('');
+
+        const lines = ['ADB',
+            'AFHJ',
+            'AGIK',
+            'AEC',
+            'DFGE',
+            'BHIE',
+            'BJKC'].map(s => s.split(''));
+
+        const pointsInLine = (points, line) => {
+            return points.all(p => line.includes(p));
+        }
+
+        const pointsInAnyLine = (...points) => {
+            return lines.any(line => pointsInLine(points, line));
+        }
+
+        const isTriangle = triple => {
+            const [x, y, z] = triple;
+            return pointsInAnyLine(x, y) && pointsInAnyLine(y, z) && pointsInAnyLine(x, z) && !pointsInAnyLine(x, y, z);
+        }
+
+        const triples = points.choose(3);
+
+        const triangles = triples.filter(isTriangle);
+
+        console.log(triangles);
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

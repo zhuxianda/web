@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<script type="text/babel">
+
+    let zhixian = [[0,1,5],[0,2,6,8],[0,3,7,9],[0,4,10],[1,2,3,4],[5,6,7,4],[5,8,9,10]];
+
+    Array.prototype.isTriange = function(x,y,z) {
+        for(let i = 0;i<zhixian.length;i++) {
+            if(zhixian[i].includes(x) && zhixian[i].includes(y)) {
+                for(let j = 0;j<zhixian.length;j++) {
+                    if((zhixian[j].includes(y) && zhixian[j].includes(z))
+                        &&(zhixian[j].includes(x) && zhixian[j].includes(z))&&j!=i) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
+    Array.prototype.take = function(num) {
+        let res = [];
+        let size = 0;
+        console.log("----",this.length);
+        for(let x = 0; x < this.length; x++) {
+            for (let y = x + 1; y < this.length; y++) {
+                for (let z = y + 1; z < this.length; z++) {
+                    console.log(size++);
+                    if(zhixian.isTriange(x,y,z)){
+                        res.push([x,y,z]);
+                    }
+                }
+            }
+        }
+    }
+
+//    Array.prototype.take = function(num) {
+//        // fasdfds
+//
+//    }.bind(this);
+
+//    let lianjie = [
+//       //A,D,F,G,E,B,H,I,J,K,C
+//        [0,1,1,1,1,1,1,1,1,1,1], // A
+//        [0,0,1,1,1,1,0,0,0,0,0], // D
+//        [0,0,0,1,1,0,1,0,1,0,0], // F
+//        [0,0,0,0,1,0,0,1,0,1,0], // G
+//        [0,0,0,0,0,1,1,1,0,0,1], // E
+//        [0,0,0,0,0,0,1,1,1,1,1], // B
+//        [0,0,0,0,0,0,0,1,1,0,0], // H
+//        [0,0,0,0,0,0,0,0,0,1,0], // I
+//        [0,0,0,0,0,0,0,0,0,1,1], // J
+//        [0,0,0,0,0,0,0,0,0,0,1], // K
+//        [0,0,0,0,0,0,0,0,0,0,0]  // C
+//
+//    ];
+
+
+
+
+    let res = [];
+
+    let lianjie = [0,1,2,3,4,5,6,7,8,9,10];
+
+    res = lianjie.take(3);
+    console.log(lianjie.length);
+    //triples.filter(triple => isTriangle(triple));
+
+
+//    function isTriange(triple) {
+//        const [k, y, z]  = triple;
+//        return zhixian[k].includes(x)&&zhixian[k].includes(y)&&zhixian[k].includes(z)
+//    }
+
+
+//    for(let x = 0; x < lianjie.length; x++) {
+//        for (let y=x+1; y<lianjie.length; y++) {
+//            if(lianjie[x][y]==1) {
+//                //console.log("x="+x,"|y:"+y)
+//                for(let z=y+1; z<lianjie.length; z++) {
+//                    if(lianjie[x][z] == 1 && lianjie[y][z] == 1) {
+//                        //console.log("x="+x,"|y:"+y,"|z:"+z);
+//                        let nozhixian = true;
+//                        for(let k= 0 ;k<zhixian.length;k++) {
+//                            if((zhixian[k].includes(x)&&zhixian[k].includes(y)&&zhixian[k].includes(z))) {
+//                                nozhixian = false;
+//                            }
+//                        }
+//                        if(nozhixian) {
+//                            res.push([x,y,z]);
+//                        }
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
+
+    //console.log(res);
+
+//    let c = res;
+//    for(let i = 0;i < res.length;i++) {
+//        //console.log(c[i]);
+//        for(let j=0;j<c[i].length;j++){
+//            if(c[i][j]==0){
+//                c[i][j] = 'A';
+//            }
+//            if(c[i][j]==1){
+//                c[i][j] = 'D';
+//            }
+//            if(c[i][j]==2){
+//                c[i][j] = 'F';
+//            }
+//            if(c[i][j]==3){
+//                c[i][j] = 'G';
+//            }
+//            if(c[i][j]==4){
+//                c[i][j] = 'E';
+//            }
+//            if(c[i][j]==5){
+//                c[i][j] = 'B';
+//            }
+//            if(c[i][j]==6){
+//                c[i][j] = 'H';
+//            }
+//            if(c[i][j]==7){
+//                c[i][j] = 'I';
+//            }
+//            if(c[i][j]==8){
+//                c[i][j] = 'J';
+//            }
+//            if(c[i][j]==9){
+//                c[i][j] = 'K';
+//            }
+//            if(c[i][j]==10){
+//                c[i][j] = 'C';
+//            }
+//        }
+//    }
+//    console.log(c);
+</script>
+
+</body>
+</html>

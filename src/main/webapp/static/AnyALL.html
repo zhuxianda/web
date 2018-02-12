@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script type="text/babel">
+        Array.prototype.all = function (f) {
+            return (this.filter((x) => f(x)).length) == this.length;
+        }
+
+        Array.prototype.any = function (f) {
+            return (this.map(f).filter((x) => x == true).length) > 0;
+        }
+
+        let any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].all((x) => {
+            return x > 5;
+        });
+        let some = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].some((x) => {
+            return x > 5;
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
