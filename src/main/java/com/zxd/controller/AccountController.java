@@ -146,8 +146,8 @@ public class AccountController {
 		String openid = (String) (openIdMap.get("openid"));
 
 		if (openid == null) {
-			map.put("code", 400);
-			map.put("info", "该Code已经被使用了");
+			map.put("code", 4001);
+			map.put("info", "该Code已经被使用了 by zxd");
 			return jsonpEntity(map, callback);
 		}
 		Long uid = weixinService.getWXUserUidBYOpenid(openid);

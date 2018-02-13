@@ -2,46 +2,75 @@
 <!DOCTYPE log4j:configuration PUBLIC "-//LOGGER" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
-	<appender name="console" class="org.apache.log4j.ConsoleAppender">
-		<param name="Target" value="System.out" />
-		<!--<layout class="org.apache.log4j.PatternLayout"> <param name="ConversionPattern" 
-			value="%m%n" /> </layout> -->
+	<!--<appender name="console" class="org.apache.log4j.ConsoleAppender">-->
+		<!--<param name="Target" value="System.out" />-->
+		<!--&lt;!&ndash;<layout class="org.apache.log4j.PatternLayout"> <param name="ConversionPattern" -->
+			<!--value="%m%n" /> </layout> &ndash;&gt;-->
+		<!--<layout class="org.apache.log4j.PatternLayout">-->
+			<!--<param name="ConversionPattern" value="%d %-5p: %m%n" />-->
+		<!--</layout>-->
+	<!--</appender>-->
+	<!--<appender name="requestScribeAppender"-->
+		<!--class="com.xm4399.adgame.promotion.log.AsyncScribeAppender">-->
+		<!--<param name="Threshold" value="info" />-->
+		<!--<param name="scribeHost" value="10.0.0.90" />-->
+		<!--<param name="scribePort" value="1464" />-->
+		<!--<param name="scribeCategory" value="adgame_promotion_request" />-->
+		<!--<param name="encoding" value="utf-8" />-->
+		<!--<layout class="org.apache.log4j.PatternLayout">-->
+			<!--<param name="ConversionPattern" value="%d %-5p: %m%n" />-->
+		<!--</layout>-->
+	<!--</appender>-->
+
+	<!--<appender name="search_ad_debug" class="org.apache.log4j.rolling.RollingFileAppender">-->
+		<!--<param name="Threshold" value="info" />-->
+		<!--<param name="Append" value="true" />-->
+		<!--<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">-->
+			<!--<param name="FileNamePattern"-->
+				<!--value="logs/search_ad_debug/search_ad_debug.%d{yyyy-MM-dd}.log" />-->
+		<!--</rollingPolicy>-->
+		<!--<layout class="org.apache.log4j.PatternLayout">-->
+			<!--<param name="ConversionPattern" value="%m%n" />-->
+		<!--</layout>-->
+	<!--</appender>-->
+
+	<!--<logger name="search_ad_debug">-->
+		<!--<level value="infos" />-->
+		<!--&lt;!&ndash; <appender-ref ref="search_ad_debug" /> &ndash;&gt;-->
+	<!--</logger>-->
+
+	<!--<logger name="com.xm4399.adgame.promotion.web.interceptor.AuthInterceptor">-->
+		<!--<level value="debug" />-->
+		<!--&lt;!&ndash; <appender-ref ref="requestScribeAppender" /> &ndash;&gt;-->
+	<!--</logger>-->
+
+
+	<appender name="test_kafka"
+			  class="org.apache.kafka.log4jappender.KafkaLog4jAppender">
+		<param name="topic" value="test" />
+		<!-- <param name="brokerList" value="10.0.0.196:9092,10.0.0.197:9092,10.0.0.198:9092" /> -->
+		<param name="brokerList" value="127.0.0.1:9092" />
+		<param name="compressionType" value="none" />
+		<param name="requiredNumAcks" value="0" />
+		<param name="syncSend" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %-5p: %m%n" />
-		</layout>
-	</appender>
-	<appender name="requestScribeAppender"
-		class="com.xm4399.adgame.promotion.log.AsyncScribeAppender">
-		<param name="Threshold" value="info" />
-		<param name="scribeHost" value="10.0.0.90" />
-		<param name="scribePort" value="1464" />
-		<param name="scribeCategory" value="adgame_promotion_request" />
-		<param name="encoding" value="utf-8" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %-5p: %m%n" />
+			<param name="ConversionPattern" value="%m" />
 		</layout>
 	</appender>
 
-	<appender name="search_ad_debug" class="org.apache.log4j.rolling.RollingFileAppender">
-		<param name="Threshold" value="info" />
-		<param name="Append" value="true" />
-		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-			<param name="FileNamePattern"
-				value="logs/search_ad_debug/search_ad_debug.%d{yyyy-MM-dd}.log" />
-		</rollingPolicy>
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%m%n" />
-		</layout>
-	</appender>
+	<!-- 	<logger name="channelAdLoads">
+            <level value="info" />
+            <appender-ref ref="channelAdLoads" />
+        </logger> -->
 
-	<logger name="search_ad_debug">
-		<level value="infos" />
-		<!-- <appender-ref ref="search_ad_debug" /> -->
-	</logger>
-
-	<logger name="com.xm4399.adgame.promotion.web.interceptor.AuthInterceptor">
-		<level value="debug" />
-		<!-- <appender-ref ref="requestScribeAppender" /> -->
+	<!-- 	<logger name="interestAdLoads">
+            <level value="info" />
+            <appender-ref ref="interestAdLoads" />
+        </logger>
+     -->
+	<logger name="test_kafka">
+		<level value="info" />
+		<appender-ref ref="test_kafka" />
 	</logger>
 
 </log4j:configuration>

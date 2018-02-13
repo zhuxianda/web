@@ -11,19 +11,17 @@
 
 	<description>Spring公共配置 </description>
 
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-		<property name="ignoreResourceNotFound" value="true" />
+	<context:component-scan base-package="com.zxd" />
+	<task:annotation-driven />
+
+	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:zxd_local.properties</value>
 				<value>file:/etc/zxd_product.properties</value>
+				<value>classpath:zxd_local.properties</value>
 			</list>
 		</property>
 	</bean>
-	
-	<context:component-scan base-package="com.zxd" />
     
 	<import resource="spring-mvc.xml" />
 	<import resource="databases.xml" /> 
@@ -31,7 +29,7 @@
 	<!-- <import resource="classpath:spring/balance-config.xml" /> -->
 	<!-- <bean class="com.xm4399.adgame.promotion.utils.SpringContextHolder"
 		lazy-init="false" /> -->
-	<task:annotation-driven />
+
 	<!--处理 @ResponseBody 中文乱码问题 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -49,7 +47,7 @@
 				</bean>
 				<!-- 启动JSON格式的配置 -->
 				<bean id="jacksonMessageConverter"
-					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 					<!-- 解决 HttpMediaTypeNotAcceptableException: Could not find acceptable 
 						representation -->
 					<property name="supportedMediaTypes">

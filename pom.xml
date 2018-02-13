@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.3.6.RELEASE</spring.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
-		<slf4j.version>1.5.10</slf4j.version>
+		<slf4j.version>1.6.1</slf4j.version>
 		<!--<logback.version>0.9.18</logback.version> -->
 		<jetty.version>6.1.25</jetty.version>
 		<jackson.version>2.8.5</jackson.version>
@@ -93,7 +93,6 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -232,6 +231,38 @@
 			<artifactId>javase</artifactId>
 			<version>3.2.0</version>
 		</dependency>
+
+<!-- log4j 配置 -->
+
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-log4j-appender</artifactId>
+			<version>0.11.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>apache-log4j-extras</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.10</artifactId>
+			<version>0.8.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- log4j 配置 -->
 		
 		<!-- https://mvnrepository.com/artifact/uk.com.robust-it/cloning -->
 		
@@ -240,7 +271,65 @@
 		    <artifactId>cloning</artifactId>
 		    <version>1.9.0</version>
 		</dependency>
-		
 
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<showWarnings>true</showWarnings>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.22</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<!--<contextXml>src/main/resources/jetty-context.xml</contextXml> &lt;!&ndash;
+						add by yuanzhe &ndash;&gt; -->
+					<stopKey>foo</stopKey>
+					<stopPort>9988</stopPort>
+					<webAppConfig>
+						<contextPath>/</contextPath>
+					</webAppConfig>
+					<webDefaultXml>src/main/webapp/WEB-INF/web.xml</webDefaultXml>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-jetty</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<scanIntervalSeconds>0</scanIntervalSeconds>
+							<daemon>true</daemon>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop-jetty</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version> <configuration> <packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+				<failOnMissingWebXml>false</failOnMissingWebXml> <warName>root</warName>
+				</configuration> </plugin> -->
+		</plugins>
+	</build>
+
+
 </project>
