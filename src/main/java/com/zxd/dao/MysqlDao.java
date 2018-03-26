@@ -32,7 +32,7 @@ public class MysqlDao {
 	
 	public static void main(String[] args) {
 		ApplicationContext ac = new
-				ClassPathXmlApplicationContext("applicationContext.xml");
+				ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 	}
 
 }

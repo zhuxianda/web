@@ -11,8 +11,9 @@ public class TestLog4j2Kafka {
 
 
     public static void main(String[] args) throws InterruptedException {
-        for(int i = 0;i <= 10; i++) {
+        for(int i = 0;i <= 10000; i++) {
             Test.info("This is Message [" + i + "] from log4j producer .. ");
+            System.out.println(i);
             Thread.sleep(1000);
         }
     }

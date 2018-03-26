@@ -37,6 +37,8 @@ public class TestKafkaConsumer implements InitializingBean {
         KafkaConsumer<String, String> consumer = null;
         try {
             consumer = new KafkaConsumer<String, String>(props);
+            System.out.println("参数呀1!");
+            System.out.println(props.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,6 +52,7 @@ public class TestKafkaConsumer implements InitializingBean {
 
             KafkaConsumer<String, String> consumer = getInstance();
             consumer.subscribe(Arrays.asList(properties.topic));
+            System.out.println(properties);
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(100);
                 for (ConsumerRecord<String, String> record : records) {
@@ -72,7 +75,7 @@ public class TestKafkaConsumer implements InitializingBean {
 
         ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         TestKafkaConsumer testKafkaConsumer = ac.getBean(TestKafkaConsumer.class);
-        //testKafkaConsumer.run();
+        testKafkaConsumer.run();
 
     }
 

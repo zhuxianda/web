@@ -26,9 +26,9 @@
 	<bean id="exceptionHandler" class="com.zxd.exception.ExceptionHandler" />
 
 	<!-- 静态资源映射 -->
-	<mvc:resources mapping="/ads/**" location="/ads/" />
-	<mvc:resources mapping="/static/**" location="/static/" />
-	<mvc:resources mapping="/**" location="/ads/"/>
+	<!--<mvc:resources mapping="/ads/**" location="/ads/" />-->
+	<!--<mvc:resources mapping="/static/**" location="/static/" />-->
+	<!--<mvc:resources mapping="/**" location="/ads/"/>-->
 
 	<!-- Configures Handler Interceptors -->
 	<mvc:interceptors>

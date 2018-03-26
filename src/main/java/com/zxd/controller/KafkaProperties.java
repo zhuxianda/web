@@ -32,4 +32,17 @@ public class KafkaProperties {
     @Value("${valueSerializer}")
     public String valueSerializer;
 
+    @Override
+    public String toString() {
+        return "KafkaProperties{" +
+                "topic='" + topic + '\'' +
+                ", groupId='" + groupId + '\'' +
+                ", bootstrapServers='" + bootstrapServers + '\'' +
+                ", enableAutoCommit='" + enableAutoCommit + '\'' +
+                ", autoCommitIntervalMs='" + autoCommitIntervalMs + '\'' +
+                ", sessionTimeoutMs='" + sessionTimeoutMs + '\'' +
+                ", keySerializer='" + keySerializer + '\'' +
+                ", valueSerializer='" + valueSerializer + '\'' +
+                '}';
+    }
 }
